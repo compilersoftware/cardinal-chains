@@ -1,0 +1,1 @@
+./bas2tap -w -s"main" -a10 main.bas main.tap
