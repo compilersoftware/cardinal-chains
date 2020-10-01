@@ -1,0 +1,1 @@
+zxbasic numeritos.bas --tzx --BASIC --autorun -S 25000
