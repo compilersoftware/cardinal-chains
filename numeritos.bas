@@ -60,8 +60,23 @@ DIM m$ as string
 
 CONST tile as uInteger = 36
 
-' ATRIBUTOS DEL CURSOR INACTIVO/SELECCIONADO
+' MATRIZ DE DATOS DE CADA PLAYER
+' X,Y,ATTR NO SELEC, ATTR SELEC.
 
+dim players (5,3) as uByte => {_
+		{0,0,57,15},_
+		{0,0,58,23},_
+		{0,0,59,31},_
+		{0,0,60,39},_
+		{0,0,61,47},_
+		{0,0,62,49}_
+}
+
+dim puntPlayers (5,0) as uInteger
+
+
+' TODO QUITAR Vars attr, VAN EN ARRAY
+' ATRIBUTOS DEL CURSOR INACTIVO/SELECCIONADO
 CONST attr1 as uByte = 57
 CONST attr2 as uByte = 58
 CONST attr3 as uByte = 59
@@ -75,9 +90,10 @@ CONST attr4B as uByte = 39
 CONST attr5B as uByte = 47
 CONST attr6B as uByte = 49
 
-' PUNTEROS DE CADA CURSOR
 
-DIM puntero1, puntero2, puntero3, puntero4, puntero5, puntero6 as uInteger
+' TODO: QUITAR PUNTEROS
+' PUNTEROS DE CADA CURSOR
+' DIM puntero1, puntero2, puntero3, puntero4, puntero5, puntero6 as uInteger
 
 ' CONTROLES
 
@@ -137,7 +153,7 @@ next
 'IMPRIME PLAYER SELECCIONADO
 'DE INCIO ES 1
 
-poke (@CURSOR + 32),attr1B: poke (@CURSOR + 33),attr1B: poke (@CURSOR + 34),attr1B: poke (@CURSOR + 35),attr1B
+poke (@CURSOR + 32),players(0,3): poke (@CURSOR + 33),players(0,3): poke (@CURSOR + 34),players(0,3): poke (@CURSOR + 35),players(0,3)
 putTile(0,prov+2,@CURSOR)
 
 return
@@ -172,12 +188,12 @@ MAPEA:
 					 a = peek (puntero)
 					if a=0 then go to MAPEA00
 					if a<10 then go to MAPEA01
-					if a=41 then a = 10: poke (@CURSOR + 32),attr1B: poke (@CURSOR + 33),attr1B: poke (@CURSOR + 34),attr1B: poke (@CURSOR + 35),attr1B:  nPlayers=1: xProta1=f: yProta1=d: xProta=f: yProta=d: puntero1 = puntero
-					if a=42 then a = 10: poke (@CURSOR + 32),attr2: poke (@CURSOR + 33),attr2: poke (@CURSOR + 34),attr2: poke (@CURSOR + 35),attr2:  nPlayers=2: xProta2=f: yProta2=d: puntero2 = puntBuffer
-					if a=43 then a = 10: poke (@CURSOR + 32),attr3: poke (@CURSOR + 33),attr3: poke (@CURSOR + 34),attr3: poke (@CURSOR + 35),attr3:  nPlayers=3: xProta3=f: yProta3=d: puntero3 = puntBuffer
-					if a=44 then a = 10: poke (@CURSOR + 32),attr4: poke (@CURSOR + 33),attr4: poke (@CURSOR + 34),attr4: poke (@CURSOR + 35),attr4:  nPlayers=4: xProta4=f: yProta4=d: puntero4 = puntBuffer
-					if a=45 then a = 10: poke (@CURSOR + 32),attr5: poke (@CURSOR + 33),attr5: poke (@CURSOR + 34),attr5: poke (@CURSOR + 35),attr5:  nPlayers=5: xProta5=f: yProta5=d: puntero5 = puntBuffer
-					if a=46 then a = 10: poke (@CURSOR + 32),attr6: poke (@CURSOR + 33),attr6: poke (@CURSOR + 34),attr6: poke (@CURSOR + 35),attr6:  nPlayers=6: xProta6=f: yProta6=d: puntero6 = puntBuffer
+					if a=41 then a = 10: poke (@CURSOR + 32),players(0,3): poke (@CURSOR + 33),players(0,3): poke (@CURSOR + 34),players(0,3): poke (@CURSOR + 35),players(0,3):  nPlayers=1: xProta1=f: yProta1=d: xProta=f: yProta=d: puntero1 = puntBuffer
+					if a=42 then a = 10: poke (@CURSOR + 32),players(1,2): poke (@CURSOR + 33),players(1,2): poke (@CURSOR + 34),players(1,2): poke (@CURSOR + 35),players(1,2):  nPlayers=2: xProta2=f: yProta2=d: puntero2 = puntBuffer
+					if a=43 then a = 10: poke (@CURSOR + 32),players(2,2): poke (@CURSOR + 33),players(2,2): poke (@CURSOR + 34),players(2,2): poke (@CURSOR + 35),players(2,2):  nPlayers=3: xProta3=f: yProta3=d: puntero3 = puntBuffer
+					if a=44 then a = 10: poke (@CURSOR + 32),players(3,2): poke (@CURSOR + 33),players(3,2): poke (@CURSOR + 34),players(3,2): poke (@CURSOR + 35),players(3,2):  nPlayers=4: xProta4=f: yProta4=d: puntero4 = puntBuffer
+					if a=45 then a = 10: poke (@CURSOR + 32),players(4,2): poke (@CURSOR + 33),players(4,2): poke (@CURSOR + 34),players(4,2): poke (@CURSOR + 35),players(4,2):  nPlayers=5: xProta5=f: yProta5=d: puntero5 = puntBuffer
+					if a=46 then a = 10: poke (@CURSOR + 32),players(5,2): poke (@CURSOR + 33),players(5,2): poke (@CURSOR + 34),players(5,2): poke (@CURSOR + 35),players(5,2):  nPlayers=6: xProta6=f: yProta6=d: puntero6 = puntBuffer
 
 MAPEA01:			putTile(f,d,(@TILES-36) + (a*tile))
 					if a=10 then  a = 0
