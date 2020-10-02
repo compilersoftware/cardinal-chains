@@ -15,9 +15,6 @@ DIM a as uByte
 
 DIM contador as UInteger
 
-' AQUÍ SE COLOCAN LAS COORDENADAS DE MOVIMIENTO ACTUALES DEPENDIENDO DEL PLAYER ELEGIDO
-DIM xProta, yProta as uByte
-
 ' NUMERO DE PLAYERS
 DIM nPlayers as uByte
 
@@ -32,7 +29,7 @@ DIM xAncho, yAlto as uByte
 DIM xBoard, yBoard as uByte
 
 ' NIVEL EN JUEGO
-DIM level as uByte = 107
+DIM level as uByte = 255
 
 ' PARA LA CADENA DEL MARCADOR DE NIVEL
 DIM m$ as string
@@ -96,7 +93,7 @@ if code inkey$= keySelectRight and nPlayers > 0 then
 	let player = player + 1
 	if player = nPlayers then player = 0: end if
 	paintPlayer(3)
-	go sub PLINTERFACE
+	coloreaNivel()
 	pausa(10)
 	beep 0.01,-12
 end if
@@ -106,7 +103,7 @@ if code inkey$= keySelectLeft and nPlayers > 0 then
 	let player = player - 1
 	if player < 0 then player = 5: end if
 	paintPlayer(3)
-	go sub PLINTERFACE
+	coloreaNivel()
 	pausa(10)
 	beep 0.01,-12
 end if
@@ -155,16 +152,11 @@ next
 ' IMPRIME PLAYER SELECCIONADO
 ' DE INCIO ES PLAYER 1 (0)
 
-
-PLINTERFACE:
-poke (@CURSOR + 32),players(player,3): poke (@CURSOR + 33),players(player,3): poke (@CURSOR + 34),players(player,3): poke (@CURSOR + 35),players(player,3)
-putTile(0,prov+2,@CURSOR)
-
+coloreaNivel()
 return
 
 'END INTERFACE
 ' ###########################################################
-
 
 ' ###########################################################
 ' MAPEA
@@ -174,7 +166,6 @@ MAPEA:
 
 			' SETEO DE VARIABLES
 			puntBuffer = @BUFFER
-			player = 0
 			contador = 0
 			 xAncho = peek (puntero)
 			 yAlto = peek (puntero+1)
@@ -191,92 +182,93 @@ MAPEA:
 					 a = peek (puntero)
 					if a=0 then go to MAPEA00
 					if a<10 then go to MAPEA01
+
 					if a=41 then
-						a = 10:
-						poke (@CURSOR + 32),players(0,3):
-						poke (@CURSOR + 33),players(0,3):
-						poke (@CURSOR + 34),players(0,3):
-						poke (@CURSOR + 35),players(0,3): 
+						a = 0:
+						player = 0 
 						nPlayers=1:
 						players(0,0)=f:
 						players(0,1)=d:
-						xProta=f:
-						yProta=d:
+						paintPlayer(3):
 						puntPlayers(0) = puntBuffer
 					end if
 
 					if a=42 then
-					a = 10:
-					poke (@CURSOR + 32),players(1,2):
-					poke (@CURSOR + 33),players(1,2):
-					poke (@CURSOR + 34),players(1,2):
-					poke (@CURSOR + 35),players(1,2):
-					nPlayers=2:
-					players(1,0)=f:
-					players(1,1)=d:
-					puntPlayers(1) = puntBuffer
+						a = 0:
+						player=1:
+						nPlayers=2:
+						players(1,0)=f:
+						players(1,1)=d:
+						paintPlayer(2):
+						puntPlayers(1) = puntBuffer
 					end if
 
 					if a=43 then
-					a = 10:
-					poke (@CURSOR + 32),players(2,2):
-					poke (@CURSOR + 33),players(2,2):
-					poke (@CURSOR + 34),players(2,2):
-					poke (@CURSOR + 35),players(2,2): 
-					nPlayers=3:
-					players(2,0)=f:
-					players(2,1)=d:
-					puntPlayers(2) = puntBuffer
+						a = 0:
+						player=2:
+						nPlayers=3:
+						players(2,0)=f:
+						players(2,1)=d:
+						paintPlayer(2): 
+						puntPlayers(2) = puntBuffer
 					end if
 
 					if a=44 then
-					a = 10:
-					poke (@CURSOR + 32),players(3,2):
-					poke (@CURSOR + 33),players(3,2):
-					poke (@CURSOR + 34),players(3,2):
-					poke (@CURSOR + 35),players(3,2): 
-					nPlayers=4:
-					players(3,0)=f:
-					players(3,1)=d:
-					puntPlayers(3) = puntBuffer
+						a = 0:
+						player=3:
+						nPlayers=4:
+						players(3,0)=f:
+						players(3,1)=d:
+						paintPlayer(2):
+						puntPlayers(3) = puntBuffer
 					end if
 
 					if a=45 then
-					a = 10:
-					poke (@CURSOR + 32),players(4,2):
-					poke (@CURSOR + 33),players(4,2):
-					poke (@CURSOR + 34),players(4,2):
-					poke (@CURSOR + 35),players(4,2): 
-					nPlayers=5:
-					players(4,0)=f:
-					players(4,1)=d:
-					puntPlayers(4) = puntBuffer
+						a = 0:
+						player=4:
+						nPlayers=5:
+						players(4,0)=f:
+						players(4,1)=d:
+						paintPlayer(2):
+						puntPlayers(4) = puntBuffer
 					end if
 
 					if a=46 then
-					a = 10:
-					poke (@CURSOR + 32),players(5,2):
-					poke (@CURSOR + 33),players(5,2):
-					poke (@CURSOR + 34),players(5,2):
-					poke (@CURSOR + 35),players(5,2): 
-					nPlayers=6:
-					players(5,0)=f:
-					players(5,1)=d:
-					puntPlayers(5) = puntBuffer
+						a = 0:
+						player=5:
+						nPlayers=6:
+						players(5,0)=f:
+						players(5,1)=d:
+						paintPlayer(2):
+						puntPlayers(5) = puntBuffer
 					end if
 
+					go to MAPEA00
+
 MAPEA01:			putTile(f,d,(@TILES-36) + (a*tile))
-					if a=10 then  a = 0
 MAPEA00:			poke (puntBuffer),a:  puntero = puntero + 1:  puntBuffer = puntBuffer + 1:  contador = contador + a
 				next f
 
 			next d
-
-return
+			player = 0
+			return
 
 ' END MAPEA
 ' ###########################################################
 
+' ###########################################################
+' CAMBIA EL COLOR DEL INDICADOR DE NIVEL DE ACUERDO CON EL PLAYER SELECCIONADO
+
+SUB coloreaNivel()
+
+	for d = 9 to 14
+		print at d,0; over 1; ink player +1; "  "
+	next
+
+END SUB
+
+
+' ###########################################################
 
 
 #include "putTile.bas"
