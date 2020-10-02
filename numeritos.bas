@@ -23,7 +23,7 @@ DIM nPlayers as uByte
 
 ' PLAYER SELECCIONADO
 ' DE 0 A 5, CORRESPONDE CON EL COLOR -1 (para manejo de arrays). SE EMPIEZA SIEMPRE CON EL BLUE SELECCIONADO
-DIM player as uByte
+DIM player as Byte
 
 ' LAS MEDIDAS EN TILES DEL NIVEL
 DIM xAncho, yAlto as uByte
@@ -48,7 +48,7 @@ dim players (5,3) as uByte => {_
 		{0,0,59,31},_
 		{0,0,60,39},_
 		{0,0,61,47},_
-		{0,0,62,49}_
+		{0,0,62,55}_
 }
 
 dim puntPlayers (5) as uInteger
@@ -80,7 +80,7 @@ go sub INTERFACE
 puntero = @LEVELPR
 go sub MAPEA
 
-fin: go to fin
+fin: go sub BUCLE: go to fin 
 
 stop
 
@@ -91,10 +91,52 @@ stop
 ' BUCLE PRINCIPAL DEL JUEGO
 BUCLE:
 
+if code inkey$= keySelectRight and nPlayers > 0 then
+	paintPlayer(2)
+	let player = player + 1
+	if player = nPlayers then player = 0: end if
+	paintPlayer(3)
+	go sub PLINTERFACE
+	asm
+	halt
+	halt
+	halt
+	end asm
+end if
 
+if code inkey$= keySelectLeft and nPlayers > 0 then
+	paintPlayer(2)
+	let player = player - 1
+	if player < 0 then player = 5: end if
+	paintPlayer(3)
+	go sub PLINTERFACE
+	asm
+	halt
+	halt
+	halt
+	halt
+	end asm
+end if
+
+return
 
 ' ###########################################################
 
+' ###########################################################
+
+
+FUNCTION paintPlayer(type as uByte) as uByte
+' cambia el estado del player seleccionado.
+' se le pasa un entero con:	2 para deseleccionar
+'							3 para seleccionar
+
+	poke (@CURSOR + 32),players(player,type): poke (@CURSOR + 33),players(player,type): poke (@CURSOR + 34),players(player,type): poke (@CURSOR + 35),players(player,type):
+	putTile(players(player,0),players(player,1),@CURSOR)
+
+end function
+
+
+' ###########################################################
 
 
 ' ###########################################################
