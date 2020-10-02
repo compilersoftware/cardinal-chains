@@ -97,11 +97,8 @@ if code inkey$= keySelectRight and nPlayers > 0 then
 	if player = nPlayers then player = 0: end if
 	paintPlayer(3)
 	go sub PLINTERFACE
-	asm
-	halt
-	halt
-	halt
-	end asm
+	pausa(10)
+	beep 0.01,-12
 end if
 
 if code inkey$= keySelectLeft and nPlayers > 0 then
@@ -110,32 +107,36 @@ if code inkey$= keySelectLeft and nPlayers > 0 then
 	if player < 0 then player = 5: end if
 	paintPlayer(3)
 	go sub PLINTERFACE
-	asm
-	halt
-	halt
-	halt
-	halt
-	end asm
+	pausa(10)
+	beep 0.01,-12
 end if
 
 return
-
 ' ###########################################################
 
 ' ###########################################################
+' hace una pausa de n milisegundos
+FUNCTION pausa(time as uByte) as uByte
 
+	for d = 0 to time
+	asm
+	halt
+	end asm
+	next
 
-FUNCTION paintPlayer(type as uByte) as uByte
+END FUNCTION
+' ###########################################################
+
+' ###########################################################
 ' cambia el estado del player seleccionado.
 ' se le pasa un entero con:	2 para deseleccionar
 '							3 para seleccionar
+FUNCTION paintPlayer(type as uByte) as uByte
 
 	poke (@CURSOR + 32),players(player,type): poke (@CURSOR + 33),players(player,type): poke (@CURSOR + 34),players(player,type): poke (@CURSOR + 35),players(player,type):
 	putTile(players(player,0),players(player,1),@CURSOR)
 
 end function
-
-
 ' ###########################################################
 
 
