@@ -40,15 +40,16 @@ DIM m$ as string
 CONST tile as uInteger = 36
 
 ' MATRIZ DE DATOS DE CADA PLAYER
-' X,Y,ATTR NO SELEC, ATTR SELEC, BUFF del valor del tile que  había antes de pisar con el player
+' X,Y,ATTR NO SELEC, ATTR SELEC, BUFF del valor del tile que  había antes de pisar con el player,
+' MOVIMIENTOS, si el player se ha movido o está en el inicio (para el cambio de attr pos. inicial)
 
-dim players (5,4) as uByte => {_
-		{0,0,57,15,0},_
-		{0,0,58,23,0},_
-		{0,0,59,31,0},_
-		{0,0,60,39,0},_
-		{0,0,61,47,0},_
-		{0,0,62,55,0}_
+dim players (5,5) as uByte => {_
+		{0,0,57,15,0,0},_
+		{0,0,58,23,0,0},_
+		{0,0,59,31,0,0},_
+		{0,0,60,39,0,0},_
+		{0,0,61,47,0,0},_
+		{0,0,62,55,0,0}_
 }
 
 ' MATRIZ DE PUNTEROS AL BUFFER POR CADA PLAYER
@@ -81,9 +82,15 @@ players(2,4)=0
 players(3,4)=0
 players(4,4)=0
 players(5,4)=0
+players(0,5)=0
+players(1,5)=0
+players(2,5)=0
+players(3,5)=0
+players(4,5)=0
+players(5,5)=0
 
 go sub INTERFACE
-puntero = @LEVEL01
+puntero = @LEVELPR2
 go sub MAPEA
 
 go to BUCLE
@@ -93,40 +100,52 @@ stop
 
 ' ###########################################################
 ' BUCLE PRINCIPAL DEL JUEGO
+
 BUCLE:
 
-'TODO BORRAR
-dim provi0 as uInteger
-provi0 = 0
-' BORRAR
-
 while (contador > 0)
-	print at 1,0; "sig. pos. player: "; peek (puntPlayers(player)+1)
-	print at 0,0; "pos. player: "; peek (puntPlayers(player))
-	print at 2,0; "puntero: "; puntPlayers(player)
-	print at 4,0; contador
-
-	provi0 = provi0 + 1
-	if provi0 = 50000 then provi0 = 0: end if
-	print at 6,0; provi0
 
 	if code inkey$ = keyReset then go to SETEO: end if
 
 	if code inkey$ = keySelectRight and nPlayers > 1 then
-		paintPlayer(2)
+		
+		if players(player, 5) = 0
+		pintaTile(2)
+		else
+		pintaTile(3)
+		end if
+		
 		player = player + 1
 		if player = nPlayers then player = 0: end if
-		paintPlayer(3)
+		
+		if players(player ,5) = 0
+		pintaTile(3)
+		else
+		pintaTile(2)
+		end if
+		
 		coloreaNivel()
 		pausa(10)
 		beep 0.01,-12
 	end if
 
 	if code inkey$ = keySelectLeft and nPlayers > 1 then
-		paintPlayer(2)
+		
+		if players(player, 5) = 0
+		pintaTile(2)
+		else
+		pintaTile(3)
+		end if
+		
 		player = player - 1
-		if player < 0 then player = nPlayers: end if
-		paintPlayer(3)
+		if player < 0 then player = nPlayers - 1: end if
+		
+		if players(player, 5) = 0
+		pintaTile(3)
+		else
+		pintaTile(2)
+		end if
+
 		coloreaNivel()
 		pausa(10)
 		beep 0.01,-12
@@ -140,10 +159,11 @@ while (contador > 0)
 			contador = contador - a2
 			puntPlayers(player) = puntPlayers(player) + 1
 			poke puntPlayers(player), 0
-			pintaTile()
+			pintaTile(3)
 			players(player,0) = players(player,0) + 2
-			paintPlayer(3)
+			pintaTile(3)
 			pausa(8)
+			players(player, 5) = 1
 		end if
 	end if
 
@@ -155,10 +175,11 @@ while (contador > 0)
 			contador = contador - a2
 			puntPlayers(player) = puntPlayers(player) - 1
 			poke puntPlayers(player), 0
-			pintaTile()
+			pintaTile(3)
 			players(player,0) = players(player,0) - 2
-			paintPlayer(3)
+			pintaTile(3)
 			pausa(8)
+			players(player, 5) = 1
 		end if
 	end if
 
@@ -170,10 +191,11 @@ while (contador > 0)
 			contador = contador - a2
 			puntPlayers(player) = puntPlayers(player) + xAncho
 			poke puntPlayers(player), 0
-			pintaTile()
+			pintaTile(3)
 			players(player,1) = players(player,1) + 2
-			paintPlayer(3)
+			pintaTile(3)
 			pausa(8)
+			players(player, 5) = 1
 		end if
 	end if
 
@@ -185,10 +207,11 @@ while (contador > 0)
 			contador = contador - a2
 			puntPlayers(player) = puntPlayers(player) - xAncho
 			poke puntPlayers(player), 0
-			pintaTile()
+			pintaTile(3)
 			players(player,1) = players(player,1) - 2
-			paintPlayer(3)
+			pintaTile(3)
 			pausa(8)
+			players(player, 5) = 1
 		end if
 	end if
 
@@ -201,15 +224,22 @@ return
 
 ' ###########################################################
 ' CUANDO AVANZAMOS POR EL TABLERO PINTA EL TILE QUE DEJA EL PLAYER DEL MISMO COLOR
-SUB pintaTile()
-	' TODO: CAMBIAR EL COLOREADO DE ATTR POR UN GRÁFICO ADECUADO
-	print ink player+1; paper player+1; at players(player,1),players(player,0);"  "
-	print ink player+1; paper player+1; at (players(player,1))+1,players(player,0);"  "
-END SUB
+
+FUNCTION pintaTile(type2 as uByte) as Integer
+
+	dim puntATTR as uInteger
+	puntATTR = cast(uInteger, players(player,1))*32 + cast(uInteger, players(player,0)) + 22528
+	poke puntATTR, players(player, type2)
+	poke puntATTR+1, players(player, type2)
+	poke puntATTR+32, players(player, type2)
+	poke puntATTR+33, players(player, type2)
+
+END FUNCTION
 ' ###########################################################
 
 ' ###########################################################
 ' hace una pausa de n milisegundos
+
 FUNCTION pausa(time as uByte) as uByte
 
 	for dPause = 0 to time
@@ -226,6 +256,7 @@ END FUNCTION
 ' cambia el estado del player seleccionado.
 ' se le pasa un entero con:	2 para deseleccionar
 '							3 para seleccionar
+
 FUNCTION paintPlayer(type as uByte) as uByte
 
 	poke (@CURSOR + 32),players(player,type):
@@ -234,11 +265,12 @@ FUNCTION paintPlayer(type as uByte) as uByte
 	poke (@CURSOR + 35),players(player,type):
 	putTile(players(player,0),players(player,1),@CURSOR)
 
+
 end function
 ' ###########################################################
 
-
 ' ###########################################################
+
 INTERFACE:
 
 'IMPRIME MARCADOR DEL NIVEL
@@ -365,8 +397,6 @@ SUB coloreaNivel()
 	next
 
 END SUB
-
-
 ' ###########################################################
 
 
