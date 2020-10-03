@@ -35,7 +35,7 @@ DIM xBoard, yBoard as uByte
 
 ' NIVEL EN JUEGO Y MÁXIMO NÚMERO DE NIVELES
 DIM level as Integer = 0
-dim levelmax as Integer = 10
+dim levelmax as Integer = 31
 
 ' PARA LA CADENA DEL MARCADOR DE NIVEL
 DIM m$ as string
@@ -93,8 +93,7 @@ cardinal = "CARDINAL CHAINS SPECTRUM"
 
 menu:
 
-border 0: paper 0: ink 0: cls
-level = 0
+border 0: paper 0: ink 0: bright 0: cls
 
 print at 3, 4; bold 1; ink 1; cardinal
 print at 23, 0; bold 1; ink 1; compiler; at 23, 28; "bout"; at 23,27; paper 1; ink 0; "A"
@@ -159,7 +158,7 @@ end sub
 BUCLE:
 
 SETEO:
-border 7: paper 7: ink 0: cls
+border 7: paper 7: ink 0: bright 0: cls
 player = 0
 players(0,4)=0
 players(1,4)=0
@@ -183,10 +182,17 @@ MAPEA()
 while (contador > 0)
 
 	if code inkey$ = keyReset then
-	border 2
+	border 1
 	pausa(30)		
 	go to SETEO
 	end if
+
+	if code inkey$ = keyMenu then
+	border 1
+	pausa(30)		
+	go to menu
+	end if
+
 
 	if code inkey$ = keySelectRight and nPlayers > 1 then
 		
@@ -245,6 +251,7 @@ while (contador > 0)
 			pintaTile(3)
 			pausa(8)
 			players(player, 5) = 1
+			beep 0.01,3
 		end if
 	end if
 
@@ -261,6 +268,7 @@ while (contador > 0)
 			pintaTile(3)
 			pausa(8)
 			players(player, 5) = 1
+			beep 0.01,3
 		end if
 	end if
 
@@ -277,6 +285,7 @@ while (contador > 0)
 			pintaTile(3)
 			pausa(8)
 			players(player, 5) = 1
+			beep 0.01,3
 		end if
 	end if
 
@@ -293,14 +302,24 @@ while (contador > 0)
 			pintaTile(3)
 			pausa(8)
 			players(player, 5) = 1
+			beep 0.01,3
 		end if
 	end if
 
 end while
-	' acabamos el nivel TODO PROVISIONAL
-FIN:	border 2: pause 100: pause 100: go to SETEO
+	
+	' CAMBIO DE NIVEL
+	level = level + 1
+	
+	if level > levelmax then level = 0: end if
 
-return
+	for d = 0 to 23
+	print at d, 0; over 1; ink 2; "                                "
+	pausa(1)
+	next d
+
+	go to BUCLE
+
 ' ###########################################################
 
 ' ###########################################################
