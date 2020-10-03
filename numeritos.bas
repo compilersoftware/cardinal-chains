@@ -16,6 +16,8 @@ DIM a2 as uByte
 
 DIM contador as UInteger
 
+DIM dPause as uInteger
+
 ' NUMERO DE PLAYERS
 DIM nPlayers as uByte
 
@@ -81,7 +83,7 @@ players(4,4)=0
 players(5,4)=0
 
 go sub INTERFACE
-puntero = @LEVELPR
+puntero = @LEVEL01
 go sub MAPEA
 
 go to BUCLE
@@ -93,11 +95,20 @@ stop
 ' BUCLE PRINCIPAL DEL JUEGO
 BUCLE:
 
+'TODO BORRAR
+dim provi0 as uInteger
+provi0 = 0
+' BORRAR
+
 while (contador > 0)
 	print at 1,0; "sig. pos. player: "; peek (puntPlayers(player)+1)
 	print at 0,0; "pos. player: "; peek (puntPlayers(player))
 	print at 2,0; "puntero: "; puntPlayers(player)
 	print at 4,0; contador
+
+	provi0 = provi0 + 1
+	if provi0 = 50000 then provi0 = 0: end if
+	print at 6,0; provi0
 
 	if code inkey$ = keyReset then go to SETEO: end if
 
@@ -114,7 +125,7 @@ while (contador > 0)
 	if code inkey$ = keySelectLeft and nPlayers > 1 then
 		paintPlayer(2)
 		player = player - 1
-		if player < 0 then player = 5: end if
+		if player < 0 then player = nPlayers: end if
 		paintPlayer(3)
 		coloreaNivel()
 		pausa(10)
@@ -132,7 +143,7 @@ while (contador > 0)
 			pintaTile()
 			players(player,0) = players(player,0) + 2
 			paintPlayer(3)
-			pausa(10)
+			pausa(8)
 		end if
 	end if
 
@@ -147,7 +158,7 @@ while (contador > 0)
 			pintaTile()
 			players(player,0) = players(player,0) - 2
 			paintPlayer(3)
-			pausa(10)
+			pausa(8)
 		end if
 	end if
 
@@ -162,7 +173,7 @@ while (contador > 0)
 			pintaTile()
 			players(player,1) = players(player,1) + 2
 			paintPlayer(3)
-			pausa(10)
+			pausa(8)
 		end if
 	end if
 
@@ -177,13 +188,13 @@ while (contador > 0)
 			pintaTile()
 			players(player,1) = players(player,1) - 2
 			paintPlayer(3)
-			pausa(10)
+			pausa(8)
 		end if
 	end if
 
 end while
 	' acabamos el nivel TODO PROVISIONAL
-FIN:	border 2: go to FIN
+FIN:	border 2: pause 100: pause 100: go to SETEO
 
 return
 ' ###########################################################
@@ -201,8 +212,9 @@ END SUB
 ' hace una pausa de n milisegundos
 FUNCTION pausa(time as uByte) as uByte
 
-	for d = 0 to time
+	for dPause = 0 to time
 	asm
+	ei
 	halt
 	end asm
 	next
