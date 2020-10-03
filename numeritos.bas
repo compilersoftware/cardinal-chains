@@ -34,8 +34,8 @@ DIM xAncho, yAlto as uByte
 DIM xBoard, yBoard as uByte
 
 ' NIVEL EN JUEGO Y MÁXIMO NÚMERO DE NIVELES
-DIM level as uInteger = 0
-dim levelmax as uInteger = 10
+DIM level as Integer = 0
+dim levelmax as Integer = 10
 
 ' PARA LA CADENA DEL MARCADOR DE NIVEL
 DIM m$ as string
@@ -81,15 +81,86 @@ keyMenu = code "t"
 
 #include "tables.asm"
 
+dim compiler, cardinal as string
+compiler = "COMPILER SOFTWARE 2020"
+cardinal = "CARDINAL CHAINS SPECTRUM"
+
 ' END VARIABLES
 ' ###########################################################
 
+' ###########################################################
+' MENU
 
-' COMIENZO DE SETEO PROVISIONAL
+menu:
+
+border 0: paper 0: ink 0: cls
+level = 0
+
+print at 3, 4; bold 1; ink 1; cardinal
+print at 23, 0; bold 1; ink 1; compiler; at 23, 28; "bout"; at 23,27; paper 1; ink 0; "A"
+print at 10, 6; ink 1; "LEVEL SELECTED"; at 8, 24; "P"; at 12,23;"OWN"; ink 0; paper 1; at 8, 23; "U"; at 12, 22; "D"
+print at 15, 6; ink 1; "PRESS SPACE TO START"
+
+MENULOOP:
+	print at 10, 22; bold 1; ink 1; "   "; at 10,22; level + 1
+
+DO
+
+	if inkey$ = "u"	then
+	level = level + 1: pausa(5)
+		if level > levelmax then
+			level = 0
+		end if
+		go to MENULOOP
+	end if
+
+	if inkey$ = "d"	then
+	level = level - 1: pausa(5)
+		if level < 0
+			level = levelmax
+		end if
+		go to MENULOOP
+	end if
+
+	if inkey$ = " " then pausa(10): go to BUCLE
+
+	if inkey$ = "a" then about()
+
+LOOP
+
+' ###########################################################
+
+' ###########################################################
+' ABOUT
+
+sub about()
+	ink 3: bright 1:
+	cls
+	print at 3, 4; bold 1; cardinal
+	print at 6, 0; "ORIGINAL PC GAME BY  DANIEL NORA"
+	print AT 7, 4; "https://danijmn.itch.io"
+	print at 10, 0; "SPECTRUM VERSION BY MIGUEL PRADA"
+	print at 13, 11; "THANKS TO"
+	print at 15, 9; "JAVIER  VISPE"
+	print at 16, 9; "FEDE  ALVAREZ"
+	print at 21, 2; "https://compiler.speccy.org"
+	print at 23, 0; bold 1; compiler; at 23, 29; "ENU"; at 23,28; paper 3; ink 0; "M"
+	
+do
+	if inkey$ ="m" then go to menu
+loop
+
+end sub
+' ###########################################################
+
+' ###########################################################
+' BUCLE PRINCIPAL DEL JUEGO
+
+BUCLE:
+
 SETEO:
 border 7: paper 7: ink 0: cls
 player = 0
-level = 11
 players(0,4)=0
 players(1,4)=0
 players(2,4)=0
@@ -103,24 +174,19 @@ players(3,5)=0
 players(4,5)=0
 players(5,5)=0
 
-go sub INTERFACE
+INTERFACE()
 
 puntero = tablelevels(level)
-go sub MAPEA
 
-go to BUCLE
-
-stop
-
-
-' ###########################################################
-' BUCLE PRINCIPAL DEL JUEGO
-
-BUCLE:
+MAPEA()
 
 while (contador > 0)
 
-	if code inkey$ = keyReset then go to SETEO: end if
+	if code inkey$ = keyReset then
+	border 2
+	pausa(30)		
+	go to SETEO
+	end if
 
 	if code inkey$ = keySelectRight and nPlayers > 1 then
 		
@@ -286,7 +352,7 @@ end function
 
 ' ###########################################################
 
-INTERFACE:
+sub INTERFACE()
 
 'IMPRIME MARCADOR DEL NIVEL
 m$ = str$(level+1)
@@ -300,7 +366,8 @@ next
 ' PONE EL COLOR AL NIVEL CORRESPONDIENTE AL PLAYER SELECCIONADO
 
 coloreaNivel()
-return
+
+end sub
 
 'END INTERFACE
 ' ###########################################################
@@ -308,7 +375,7 @@ return
 ' ###########################################################
 ' MAPEA
 
-MAPEA:
+sub MAPEA()
 			' ENTRADA en puntero el nivel a volcar
 
 			' SETEO DE VARIABLES
@@ -398,7 +465,8 @@ MAPEA00:			poke (puntBuffer),a:  puntero = puntero + 1:  puntBuffer = puntBuffer
 
 			next d
 			player = 0
-			return
+
+END SUB
 
 ' END MAPEA
 ' ###########################################################
@@ -418,7 +486,6 @@ END SUB
 #include "putTile.bas"
 #include "graphs.asm"
 #include "levels.asm"
-
 
 ' BUFFER DE PANTALLA
 BUFFER:
