@@ -1,5 +1,7 @@
 ' numeritos
 ' 2020 COMPILER SOFTWARE
+' Versión Spectum: Miguel A. G. Prada.
+' Juego original: Cardinal Chains de Daniel Nora.
 
 ' ###########################################################
 ' VARIABLES
@@ -31,8 +33,9 @@ DIM xAncho, yAlto as uByte
 ' LAS COORDENADAS DE IMPRESIÓN ESQUINA SUP/IZQ DEL NIVEL
 DIM xBoard, yBoard as uByte
 
-' NIVEL EN JUEGO
-DIM level as uByte = 255
+' NIVEL EN JUEGO Y MÁXIMO NÚMERO DE NIVELES
+DIM level as uInteger = 0
+dim levelmax as uInteger = 10
 
 ' PARA LA CADENA DEL MARCADOR DE NIVEL
 DIM m$ as string
@@ -43,14 +46,23 @@ CONST tile as uInteger = 36
 ' X,Y,ATTR NO SELEC, ATTR SELEC, BUFF del valor del tile que  había antes de pisar con el player,
 ' MOVIMIENTOS, si el player se ha movido o está en el inicio (para el cambio de attr pos. inicial)
 
-dim players (5,5) as uByte => {_
-		{0,0,57,15,0,0},_
-		{0,0,58,23,0,0},_
-		{0,0,59,31,0,0},_
-		{0,0,60,39,0,0},_
-		{0,0,61,47,0,0},_
-		{0,0,62,55,0,0}_
-}
+' dim players (5,5) as uByte => {_
+'		{0,0,57,15,0,0},_
+'		{0,0,58,23,0,0},_
+'		{0,0,59,31,0,0},_
+'		{0,0,60,39,0,0},_
+'		{0,0,61,47,0,0},_
+'		{0,0,62,55,0,0}_
+'}
+
+ dim players (5,5) as uByte => {_
+		{0,0,65,72,0,0},_
+		{0,0,66,80,0,0},_
+		{0,0,67,88,0,0},_
+		{0,0,68,96,0,0},_
+		{0,0,69,104,0,0},_
+		{0,0,70,112,0,0}_
+ }
 
 ' MATRIZ DE PUNTEROS AL BUFFER POR CADA PLAYER
 dim puntPlayers (5) as uInteger
@@ -67,15 +79,17 @@ keySelectRight = code "m"
 keyReset = code "r"
 keyMenu = code "t"
 
+#include "tables.asm"
+
 ' END VARIABLES
 ' ###########################################################
 
 
 ' COMIENZO DE SETEO PROVISIONAL
 SETEO:
-border 0: paper 0: ink 7: cls
-poke UINTEGER 23675, @UDG
+border 7: paper 7: ink 0: cls
 player = 0
+level = 11
 players(0,4)=0
 players(1,4)=0
 players(2,4)=0
@@ -90,7 +104,8 @@ players(4,5)=0
 players(5,5)=0
 
 go sub INTERFACE
-puntero = @LEVELPR2
+
+puntero = tablelevels(level)
 go sub MAPEA
 
 go to BUCLE
@@ -274,7 +289,7 @@ end function
 INTERFACE:
 
 'IMPRIME MARCADOR DEL NIVEL
-m$ = str$(level)
+m$ = str$(level+1)
 DIM prov as uByte = (24-(len(m$)*2))/2
 for d = 0 to len (m$) - 1
 	a = val(m$(d))
@@ -283,6 +298,7 @@ for d = 0 to len (m$) - 1
 next
 
 ' PONE EL COLOR AL NIVEL CORRESPONDIENTE AL PLAYER SELECCIONADO
+
 coloreaNivel()
 return
 
@@ -399,17 +415,9 @@ SUB coloreaNivel()
 END SUB
 ' ###########################################################
 
-
 #include "putTile.bas"
 #include "graphs.asm"
 #include "levels.asm"
-
-UDG:
-ASM
-DEFB	  0, 16, 16, 16, 84, 56, 16,  0	; FLECHA ABAJO (144)
-DEFB	  0, 16, 32,126, 32, 16,  0,  0 ; FLECHA IZQUIERDA (145)
-DEFB	  0,  8,  4,126,  4,  8,  0,  0 ; FLECHA DERECHA (146)
-END ASM
 
 
 ' BUFFER DE PANTALLA
