@@ -35,7 +35,7 @@ DIM xBoard, yBoard as uByte
 
 ' NIVEL EN JUEGO Y MÁXIMO NÚMERO DE NIVELES
 DIM level as Integer = 0
-dim levelmax as Integer = 49
+dim levelmax as Integer = 74
 
 ' PARA LA CADENA DEL MARCADOR DE NIVEL
 DIM m$ as string
