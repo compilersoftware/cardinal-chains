@@ -13,14 +13,12 @@ tablelevels(7) = @LEVEL008
 tablelevels(8) = @LEVEL009
 tablelevels(9) = @LEVEL010
 tablelevels(10) = @LEVEL011
-
 tablelevels(11) = @LEVEL012
 tablelevels(12) = @LEVEL013
 tablelevels(13) = @LEVEL014
 tablelevels(14) = @LEVEL015
 tablelevels(15) = @LEVEL016
 tablelevels(16) = @LEVEL017
-
 tablelevels(17) = @LEVEL018
 tablelevels(18) = @LEVEL019
 tablelevels(19) = @LEVEL020

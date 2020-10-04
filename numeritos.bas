@@ -213,7 +213,7 @@ while (contador > 0)
 		
 		coloreaNivel()
 		pausa(10)
-		beep 0.01,-12
+		beep 0.01,-2
 	end if
 
 	if code inkey$ = keySelectLeft and nPlayers > 1 then
@@ -235,7 +235,7 @@ while (contador > 0)
 
 		coloreaNivel()
 		pausa(10)
-		beep 0.01,-12
+		beep 0.01,-2
 	end if
 
 	if code inkey$ = keyRight and players(player,0) < (xBoard + (xAncho*2)-2) then
@@ -251,7 +251,7 @@ while (contador > 0)
 			pintaTile(3)
 			pausa(8)
 			players(player, 5) = 1
-			beep 0.01,3
+			beep 0.01,-12
 		end if
 	end if
 
@@ -268,7 +268,7 @@ while (contador > 0)
 			pintaTile(3)
 			pausa(8)
 			players(player, 5) = 1
-			beep 0.01,3
+			beep 0.01,-12
 		end if
 	end if
 
@@ -285,7 +285,7 @@ while (contador > 0)
 			pintaTile(3)
 			pausa(8)
 			players(player, 5) = 1
-			beep 0.01,3
+			beep 0.01,-12
 		end if
 	end if
 
@@ -302,7 +302,7 @@ while (contador > 0)
 			pintaTile(3)
 			pausa(8)
 			players(player, 5) = 1
-			beep 0.01,3
+			beep 0.01,-12
 		end if
 	end if
 
