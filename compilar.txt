@@ -1,1 +1,1 @@
-zxbasic numeritos.bas --tzx --BASIC --autorun -S 25000
+zxbasic cchains.bas --tzx --BASIC --autorun -S 32768
