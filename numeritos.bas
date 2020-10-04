@@ -84,15 +84,15 @@ cardinal = "CARDINAL CHAINS SPECTRUM"
 
 menu:
 
-border 0: paper 0: ink 0: bright 0: cls
+border 0: paper 0: ink 2: bright 0: cls
 
-print at 3, 4; bold 1; ink 1; cardinal
-print at 23, 0; bold 1; ink 1; compiler; at 23, 28; "bout"; at 23,27; paper 1; ink 0; "A"
-print at 10, 6; ink 1; "LEVEL SELECTED"; at 8, 24; "P"; at 12,23;"OWN"; ink 0; paper 1; at 8, 23; "U"; at 12, 22; "D"
-print at 15, 6; ink 1; "PRESS SPACE TO START"
+print at 3, 4; bold 1; cardinal
+print at 23, 0; bold 1; ink 7; bright 1; compiler; at 23, 28; bright 0; ink 2; bold 0; "bout"; at 23,27; bright 1; bold 1; "A"
+print at 10, 6; "LEVEL SELECTED"; at 8, 23; "P"; at 12,23;"OWN"; bright 1; bold 1; at 8, 22; "U"; at 12, 22; "D"
+print at 15, 6; "PRESS SPACE TO START"
 
 MENULOOP:
-	print at 10, 22; bold 1; ink 1; "   "; at 10,22; level + 1
+	print at 10, 22; bold 1; "   "; at 10,22; level + 1
 
 DO
 
@@ -124,17 +124,19 @@ LOOP
 ' ABOUT
 
 sub about()
-	ink 3: bright 1:
+	ink 3
 	cls
 	print at 3, 4; bold 1; cardinal
 	print at 6, 0; "ORIGINAL PC GAME BY  DANIEL NORA"
 	print AT 7, 4; "https://danijmn.itch.io"
 	print at 10, 0; "SPECTRUM VERSION BY MIGUEL PRADA"
-	print at 13, 11; "THANKS TO"
-	print at 15, 9; "JAVIER  VISPE"
-	print at 16, 9; "FEDE  ALVAREZ"
+	print at 12, 11; "THANKS TO"
+	print at 14, 9; "JAVIER  VISPE"
+	print at 15, 9; "FEDE  ALVAREZ"
+	print at 18, 4; "MOVE: OPQA - SELECT: NM"
+	print at 19, 4; "R: RESET LEVEL - T: MENU"
 	print at 21, 2; "https://compiler.speccy.org"
-	print at 23, 0; bold 1; compiler; at 23, 29; "ENU"; at 23,28; paper 3; ink 0; "M"
+	print at 23, 0; bright 1; bold 1; ink 7; compiler; bold 0; at 23, 29; ink 3; bright 0; "ENU"; at 23,28; bold 1; bright 1; "M"
 	
 do
 	if inkey$ ="m" then go to menu
