@@ -35,7 +35,7 @@ DIM xBoard, yBoard as uByte
 
 ' NIVEL EN JUEGO Y MÁXIMO NÚMERO DE NIVELES
 DIM level as Integer = 0
-dim levelmax as Integer = 74
+dim levelmax as Integer = 99
 
 ' PARA LA CADENA DEL MARCADOR DE NIVEL
 DIM m$ as string
@@ -45,15 +45,6 @@ CONST tile as uInteger = 36
 ' MATRIZ DE DATOS DE CADA PLAYER
 ' X,Y,ATTR NO SELEC, ATTR SELEC, BUFF del valor del tile que  había antes de pisar con el player,
 ' MOVIMIENTOS, si el player se ha movido o está en el inicio (para el cambio de attr pos. inicial)
-
-' dim players (5,5) as uByte => {_
-'		{0,0,57,15,0,0},_
-'		{0,0,58,23,0,0},_
-'		{0,0,59,31,0,0},_
-'		{0,0,60,39,0,0},_
-'		{0,0,61,47,0,0},_
-'		{0,0,62,55,0,0}_
-'}
 
  dim players (5,5) as uByte => {_
 		{0,0,65,72,0,0},_
