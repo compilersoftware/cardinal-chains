@@ -35,7 +35,7 @@ DIM xBoard, yBoard as uByte
 
 ' NIVEL EN JUEGO Y MÁXIMO NÚMERO DE NIVELES
 DIM level as Integer = 0
-dim levelmax as Integer = 115
+dim levelmax as Integer = 149
 
 ' PARA LA CADENA DEL MARCADOR DE NIVEL
 DIM m$ as string
@@ -228,6 +228,20 @@ while (contador > 0)
 		pausa(10)
 		beep 0.01,-2
 	end if
+
+	' CHEAT
+	if inkey$ = "7" and level < levelmax then
+		level = level + 1
+		pausa(8)
+		go to BUCLE
+	end if
+
+	if inkey$ = "6" and level > 0 then
+		level = level - 1
+		pausa(8)
+		go to BUCLE
+	end if
+
 
 	if code inkey$ = keyRight and players(player,0) < (xBoard + (xAncho*2)-2) then
 		a =  players(player,4)

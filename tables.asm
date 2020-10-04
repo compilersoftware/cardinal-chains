@@ -1,6 +1,6 @@
 ' TABLA DE DIRECCIONAMIENTO PARA LOS NIVELES
 
-dim tablelevels (115) as uInteger
+dim tablelevels (149) as uInteger
 
 tablelevels(0) = @LEVEL001
 tablelevels(1) = @LEVEL002
@@ -118,3 +118,38 @@ tablelevels(112) = @LEVEL113
 tablelevels(113) = @LEVEL114
 tablelevels(114) = @LEVEL115
 tablelevels(115) = @LEVEL116
+
+tablelevels(116) = @LEVEL117
+tablelevels(117) = @LEVEL118
+tablelevels(118) = @LEVEL119
+tablelevels(119) = @LEVEL120
+tablelevels(120) = @LEVEL121
+tablelevels(121) = @LEVEL122
+tablelevels(122) = @LEVEL123
+tablelevels(123) = @LEVEL124
+tablelevels(124) = @LEVEL125
+tablelevels(125) = @LEVEL126
+tablelevels(126) = @LEVEL127
+tablelevels(127) = @LEVEL128
+tablelevels(128) = @LEVEL129
+tablelevels(129) = @LEVEL130
+tablelevels(130) = @LEVEL131
+tablelevels(131) = @LEVEL132
+tablelevels(132) = @LEVEL133
+tablelevels(133) = @LEVEL134
+tablelevels(134) = @LEVEL135
+tablelevels(135) = @LEVEL136
+tablelevels(136) = @LEVEL137
+tablelevels(137) = @LEVEL138
+tablelevels(138) = @LEVEL139
+tablelevels(139) = @LEVEL140
+tablelevels(140) = @LEVEL141
+tablelevels(141) = @LEVEL142
+tablelevels(142) = @LEVEL143
+tablelevels(143) = @LEVEL144
+tablelevels(144) = @LEVEL145
+tablelevels(145) = @LEVEL146
+tablelevels(146) = @LEVEL147
+tablelevels(147) = @LEVEL148
+tablelevels(148) = @LEVEL149
+tablelevels(149) = @LEVEL150
