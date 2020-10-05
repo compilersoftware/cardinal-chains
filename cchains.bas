@@ -59,14 +59,16 @@ CONST tile as uInteger = 36
 dim puntPlayers (5) as uInteger
 
 ' CONTROLES
-DIM keyUp, keyDown, keyRight, keyLeft, keySelectLeft, keySelectRight, keyReset, keyMenu as uByte
+DIM keyUp, keyDown, keyRight, keyLeft, keySelectLeft, keySelectRight, keySelectLeft2, keySelectRight2, keyReset, keyMenu as uByte
 
 keyUp = code "q"
 keyDown = code "a"
 keyRight = code "p"
 keyLeft = code "o"
 keySelectLeft = code "n"
+keySelectLeft2 = code "k"
 keySelectRight = code "m"
+keySelectRight2 = code "l"
 keyReset = code "r"
 keyMenu = code "t"
 
@@ -87,12 +89,14 @@ menu:
 border 0: paper 0: ink 2: bright 0: cls
 
 print at 3, 4; bold 1; cardinal
-print at 23, 0; bold 1; ink 7; bright 1; compiler; at 23, 28; bright 0; ink 2; bold 0; "bout"; at 23,27; bright 1; bold 1; "A"
+print at 23, 28; bright 0; ink 2; bold 0; "bout"; at 23,27; bright 1; bold 1; "A"
 print at 10, 6; "LEVEL SELECTED"; at 8, 23; "P"; at 12,23;"OWN"; bright 1; bold 1; at 8, 22; "U"; at 12, 22; "D"
 print at 15, 6; "PRESS SPACE TO START"
+printlogo(0,20)
+print at 23, 4; ink 7; bright 1; "2020"
 
 MENULOOP:
-	print at 10, 22; bold 1; "   "; at 10,22; level + 1
+	print at 10, 22; bold 1; "   "; ink 7; bright 1; at 10,22; level + 1
 
 DO
 
@@ -133,7 +137,7 @@ sub about()
 	print at 12, 11; "THANKS TO"
 	print at 14, 9; "JAVIER  VISPE"
 	print at 15, 9; "FEDE  ALVAREZ"
-	print at 18, 4; "MOVE: OPQA - SELECT: NM"
+	print at 18, 1; "MOVE: OPQA - SELECT: NM or KL"
 	print at 19, 4; "R: RESET LEVEL - T: MENU"
 	print at 21, 2; "https://compiler.speccy.org"
 	print at 23, 0; bright 1; bold 1; ink 7; compiler; bold 0; at 23, 29; ink 3; bright 0; "ENU"; at 23,28; bold 1; bright 1; "M"
@@ -187,7 +191,7 @@ while (contador > 0)
 	end if
 
 
-	if code inkey$ = keySelectRight and nPlayers > 1 then
+	if (code inkey$ = keySelectRight or code inkey$ = keySelectRight2) and nPlayers > 1 then
 		
 		if players(player, 5) = 0
 		pintaTile(2)
@@ -209,7 +213,7 @@ while (contador > 0)
 		beep 0.01,-2
 	end if
 
-	if code inkey$ = keySelectLeft and nPlayers > 1 then
+	if (code inkey$ = keySelectLeft or code inkey$ = keySelectLeft2) and nPlayers > 1 then
 		
 		if players(player, 5) = 0
 		pintaTile(2)
@@ -372,6 +376,23 @@ FUNCTION paintPlayer(type as uByte) as uByte
 	poke (@CURSOR + 35),players(player,type):
 	putTile(players(player,0),players(player,1),@CURSOR)
 
+
+end function
+' ###########################################################
+
+' ###########################################################
+' IMPRIME EL LOGO DE COMPILER EN PANTALLA EN LAS POSICIONES XY
+
+function printlogo(xLogo as uByte, yLogo as uByte) as uByte
+
+	for d = 0 to 7
+	putTile(xLogo, yLogo, tablelogo(d))
+	xLogo = xLogo +2
+	if d = 3 then
+		xLogo = xLogo - 8
+		yLogo = yLogo + 2
+	end if
+	next
 
 end function
 ' ###########################################################

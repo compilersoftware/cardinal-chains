@@ -118,7 +118,6 @@ tablelevels(112) = @LEVEL113
 tablelevels(113) = @LEVEL114
 tablelevels(114) = @LEVEL115
 tablelevels(115) = @LEVEL116
-
 tablelevels(116) = @LEVEL117
 tablelevels(117) = @LEVEL118
 tablelevels(118) = @LEVEL119
@@ -153,3 +152,15 @@ tablelevels(146) = @LEVEL147
 tablelevels(147) = @LEVEL148
 tablelevels(148) = @LEVEL149
 tablelevels(149) = @LEVEL150
+
+' tabla de gráficos para el logo
+dim tablelogo (7) as uInteger
+
+tablelogo(0) = @LOGO01
+tablelogo(1) = @LOGO02
+tablelogo(2) = @LOGO03
+tablelogo(3) = @LOGO04
+tablelogo(4) = @LOGO05
+tablelogo(5) = @LOGO06
+tablelogo(6) = @LOGO07
+tablelogo(7) = @LOGO08
