@@ -1,6 +1,6 @@
 ' TABLA DE DIRECCIONAMIENTO PARA LOS NIVELES
 
-dim tablelevels (149) as uInteger
+dim tablelevels (199) as uInteger
 
 tablelevels(0) = @LEVEL001
 tablelevels(1) = @LEVEL002
@@ -152,6 +152,57 @@ tablelevels(146) = @LEVEL147
 tablelevels(147) = @LEVEL148
 tablelevels(148) = @LEVEL149
 tablelevels(149) = @LEVEL150
+
+tablelevels(150) = @LEVEL151
+tablelevels(151) = @LEVEL152
+tablelevels(152) = @LEVEL153
+tablelevels(153) = @LEVEL154
+tablelevels(154) = @LEVEL155
+tablelevels(155) = @LEVEL156
+tablelevels(156) = @LEVEL157
+tablelevels(157) = @LEVEL158
+tablelevels(158) = @LEVEL159
+tablelevels(159) = @LEVEL160
+tablelevels(160) = @LEVEL161
+tablelevels(161) = @LEVEL162
+tablelevels(162) = @LEVEL163
+tablelevels(163) = @LEVEL164
+tablelevels(164) = @LEVEL165
+tablelevels(165) = @LEVEL166
+tablelevels(166) = @LEVEL167
+tablelevels(167) = @LEVEL168
+tablelevels(168) = @LEVEL169
+tablelevels(169) = @LEVEL170
+tablelevels(170) = @LEVEL171
+tablelevels(171) = @LEVEL172
+tablelevels(172) = @LEVEL173
+tablelevels(173) = @LEVEL174
+tablelevels(174) = @LEVEL175
+tablelevels(175) = @LEVEL176
+tablelevels(176) = @LEVEL177
+tablelevels(177) = @LEVEL178
+tablelevels(178) = @LEVEL179
+tablelevels(179) = @LEVEL180
+tablelevels(180) = @LEVEL181
+tablelevels(181) = @LEVEL182
+tablelevels(182) = @LEVEL183
+tablelevels(183) = @LEVEL184
+tablelevels(184) = @LEVEL185
+tablelevels(185) = @LEVEL186
+tablelevels(186) = @LEVEL187
+tablelevels(187) = @LEVEL188
+tablelevels(188) = @LEVEL189
+tablelevels(189) = @LEVEL190
+tablelevels(190) = @LEVEL191
+tablelevels(191) = @LEVEL192
+tablelevels(192) = @LEVEL193
+tablelevels(193) = @LEVEL194
+tablelevels(194) = @LEVEL195
+tablelevels(195) = @LEVEL196
+tablelevels(196) = @LEVEL197
+tablelevels(197) = @LEVEL198
+tablelevels(198) = @LEVEL199
+tablelevels(199) = @LEVEL200
 
 ' tabla de gráficos para el logo
 dim tablelogo (7) as uInteger
