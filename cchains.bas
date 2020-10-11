@@ -116,6 +116,12 @@ DO
 		go to MENULOOP
 	end if
 
+	if inkey$ = "1" then level = 99 : pausa(5): go to MENULOOP
+
+	if inkey$ = "2" then level = 199 : pausa(5): go to MENULOOP
+
+	if inkey$ = "3" then level = 299 : pausa(5): go to MENULOOP
+
 	if inkey$ = " " then pausa(10): go to BUCLE
 
 	if inkey$ = "a" then about()
