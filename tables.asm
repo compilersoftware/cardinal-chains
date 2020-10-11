@@ -1,6 +1,6 @@
 ' TABLA DE DIRECCIONAMIENTO PARA LOS NIVELES
 
-dim tablelevels (199) as uInteger
+dim tablelevels (249) as uInteger
 
 tablelevels(0) = @LEVEL001
 tablelevels(1) = @LEVEL002
@@ -152,7 +152,6 @@ tablelevels(146) = @LEVEL147
 tablelevels(147) = @LEVEL148
 tablelevels(148) = @LEVEL149
 tablelevels(149) = @LEVEL150
-
 tablelevels(150) = @LEVEL151
 tablelevels(151) = @LEVEL152
 tablelevels(152) = @LEVEL153
@@ -203,6 +202,57 @@ tablelevels(196) = @LEVEL197
 tablelevels(197) = @LEVEL198
 tablelevels(198) = @LEVEL199
 tablelevels(199) = @LEVEL200
+
+tablelevels(200) = @LEVEL201
+tablelevels(201) = @LEVEL202
+tablelevels(202) = @LEVEL203
+tablelevels(203) = @LEVEL204
+tablelevels(204) = @LEVEL205
+tablelevels(205) = @LEVEL206
+tablelevels(206) = @LEVEL207
+tablelevels(207) = @LEVEL208
+tablelevels(208) = @LEVEL209
+tablelevels(209) = @LEVEL210
+tablelevels(210) = @LEVEL211
+tablelevels(211) = @LEVEL212
+tablelevels(212) = @LEVEL213
+tablelevels(213) = @LEVEL214
+tablelevels(214) = @LEVEL215
+tablelevels(215) = @LEVEL216
+tablelevels(216) = @LEVEL217
+tablelevels(217) = @LEVEL218
+tablelevels(218) = @LEVEL219
+tablelevels(219) = @LEVEL220
+tablelevels(220) = @LEVEL221
+tablelevels(221) = @LEVEL222
+tablelevels(222) = @LEVEL223
+tablelevels(223) = @LEVEL224
+tablelevels(224) = @LEVEL225
+tablelevels(225) = @LEVEL226
+tablelevels(226) = @LEVEL227
+tablelevels(227) = @LEVEL228
+tablelevels(228) = @LEVEL229
+tablelevels(229) = @LEVEL230
+tablelevels(230) = @LEVEL231
+tablelevels(231) = @LEVEL232
+tablelevels(232) = @LEVEL233
+tablelevels(233) = @LEVEL234
+tablelevels(234) = @LEVEL235
+tablelevels(235) = @LEVEL236
+tablelevels(236) = @LEVEL237
+tablelevels(237) = @LEVEL238
+tablelevels(238) = @LEVEL239
+tablelevels(239) = @LEVEL240
+tablelevels(240) = @LEVEL241
+tablelevels(241) = @LEVEL242
+tablelevels(242) = @LEVEL243
+tablelevels(243) = @LEVEL244
+tablelevels(244) = @LEVEL245
+tablelevels(245) = @LEVEL246
+tablelevels(246) = @LEVEL247
+tablelevels(247) = @LEVEL248
+tablelevels(248) = @LEVEL249
+tablelevels(249) = @LEVEL250
 
 ' tabla de gráficos para el logo
 dim tablelogo (7) as uInteger
